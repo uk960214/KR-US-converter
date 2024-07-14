@@ -1,33 +1,63 @@
-import { useState, useEffect } from "react";
-import { Typography } from "@mui/material";
+import { useEffect, useState } from "react";
+import { Box, Typography } from "@mui/material";
 
-function TimeDisplay() {
-  const [currentTime, setCurrentTime] = useState(new Date());
-  const [newYorkTime, setNewYorkTime] = useState(new Date());
+interface TimeDisplayProps {
+  city: string;
+  timeZone: string;
+}
+
+const TimeDisplay: React.FC<TimeDisplayProps> = ({ city, timeZone }) => {
+  const [time, setTime] = useState(
+    new Date().toLocaleTimeString("en-US", {
+      timeZone,
+      hour: "2-digit",
+      minute: "2-digit",
+    })
+  );
+  const [date, setDate] = useState(
+    new Date().toLocaleDateString("en-US", {
+      timeZone,
+      weekday: "long",
+      month: "long",
+      day: "numeric",
+    })
+  );
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      const now = new Date();
-      setCurrentTime(now);
-      setNewYorkTime(
-        new Date(now.toLocaleString("en-US", { timeZone: "America/New_York" }))
+    const interval = setInterval(() => {
+      setTime(
+        new Date().toLocaleTimeString("en-US", {
+          timeZone,
+          hour: "2-digit",
+          minute: "2-digit",
+        })
+      );
+      setDate(
+        new Date().toLocaleDateString("en-US", {
+          timeZone,
+          weekday: "long",
+          month: "long",
+          day: "numeric",
+        })
       );
     }, 1000);
 
-    return () => clearInterval(timer);
-  }, []);
+    return () => clearInterval(interval);
+  }, [timeZone]);
 
   return (
-    <div>
-      <Typography variant="h6">현재 시간</Typography>
-      <Typography variant="body1">
-        한국 시간: {currentTime.toLocaleTimeString()}
+    <Box display="flex" flexDirection="column" alignItems="center" my={2}>
+      <Typography variant="h6" align="center" sx={{ fontWeight: "bold" }}>
+        {city}
       </Typography>
-      <Typography variant="body1">
-        뉴욕 시간: {newYorkTime.toLocaleTimeString()}
+      <Typography variant="subtitle1" align="center">
+        {date}
       </Typography>
-    </div>
+      <Typography variant="h4" align="center" sx={{ fontWeight: "bold" }}>
+        {time}
+      </Typography>
+    </Box>
   );
-}
+};
 
 export default TimeDisplay;
