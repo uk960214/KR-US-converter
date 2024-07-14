@@ -3,6 +3,7 @@ import CurrencyConverter from "./components/CurrencyConverter";
 import LengthConverter from "./components/LengthConverter";
 import WeightConverter from "./components/WeightConverter";
 import VolumeConverter from "./components/VolumeConverter";
+import ShoeSizeConverter from "./components/ShoeSizeConverter";
 
 function App() {
   return (
@@ -24,6 +25,9 @@ function App() {
         </Grid>
         <Grid item xs={12} sm={6}>
           <VolumeConverter />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <ShoeSizeConverter />
         </Grid>
       </Grid>
     </Container>
