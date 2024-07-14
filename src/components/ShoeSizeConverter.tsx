@@ -1,7 +1,5 @@
-import { Typography, Grid } from "@mui/material";
 import { createConverterStore } from "../store/createConverterStore";
-import ConverterInput from "./ConverterInput";
-import SaveButton from "./SaveButton";
+import ConverterContainer from "./ConverterContainer";
 
 const useShoeSizeStore = createConverterStore("shoeSize");
 
@@ -28,31 +26,16 @@ function ShoeSizeConverter() {
   };
 
   return (
-    <div>
-      <Typography variant="h6">신발 사이즈 변환기</Typography>
-      <Grid container spacing={2} alignItems="center">
-        <Grid item xs={5}>
-          <ConverterInput
-            value={amount}
-            onChange={handleAmountChange}
-            adornment="KR"
-            adornmentPosition="end"
-          />
-        </Grid>
-        <Grid item xs={2} style={{ textAlign: "center" }}>
-          <Typography variant="h6">↔</Typography>
-        </Grid>
-        <Grid item xs={5}>
-          <ConverterInput
-            value={amount - 18}
-            onChange={handleConvertedAmountChange}
-            adornment="US"
-            adornmentPosition="end"
-          />
-        </Grid>
-      </Grid>
-      <SaveButton onClick={handleSave} />
-    </div>
+    <ConverterContainer
+      title="신발 크기 변환기"
+      amount={amount}
+      convertedAmount={amount - 18}
+      onAmountChange={handleAmountChange}
+      onConvertedAmountChange={handleConvertedAmountChange}
+      adornmentLeft="KR"
+      adornmentRight="US"
+      onSave={handleSave}
+    />
   );
 }
 

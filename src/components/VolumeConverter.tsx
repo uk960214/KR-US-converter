@@ -1,7 +1,5 @@
-import { Typography, Grid } from "@mui/material";
 import { createConverterStore } from "../store/createConverterStore";
-import ConverterInput from "./ConverterInput";
-import SaveButton from "./SaveButton";
+import ConverterContainer from "./ConverterContainer";
 
 const useVolumeStore = createConverterStore("volume");
 
@@ -34,31 +32,16 @@ function VolumeConverter() {
   };
 
   return (
-    <div>
-      <Typography variant="h6">부피 변환기</Typography>
-      <Grid container spacing={2} alignItems="center">
-        <Grid item xs={5}>
-          <ConverterInput
-            value={amount}
-            onChange={handleAmountChange}
-            adornment="L"
-            adornmentPosition="end"
-          />
-        </Grid>
-        <Grid item xs={2} style={{ textAlign: "center" }}>
-          <Typography variant="h6">↔</Typography>
-        </Grid>
-        <Grid item xs={5}>
-          <ConverterInput
-            value={amount * 0.264172}
-            onChange={handleConvertedAmountChange}
-            adornment="gal"
-            adornmentPosition="end"
-          />
-        </Grid>
-      </Grid>
-      <SaveButton onClick={handleSave} />
-    </div>
+    <ConverterContainer
+      title="부피 변환기"
+      amount={amount}
+      convertedAmount={amount * 0.264172}
+      onAmountChange={handleAmountChange}
+      onConvertedAmountChange={handleConvertedAmountChange}
+      adornmentLeft="L"
+      adornmentRight="gal"
+      onSave={handleSave}
+    />
   );
 }
 

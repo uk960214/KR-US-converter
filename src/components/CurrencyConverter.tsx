@@ -1,8 +1,6 @@
-import { Typography, Grid } from "@mui/material";
 import { createConverterStore } from "../store/createConverterStore";
 import useFetchExchangeRate from "../hooks/useFetchExchangeRate";
-import ConverterInput from "./ConverterInput";
-import SaveButton from "./SaveButton";
+import ConverterContainer from "./ConverterContainer";
 
 const useCurrencyStore = createConverterStore("currency");
 
@@ -37,39 +35,24 @@ function CurrencyConverter() {
   };
 
   return (
-    <div>
-      <Typography variant="h6">통화 변환기</Typography>
-      <Grid container spacing={2} alignItems="center">
-        <Grid item xs={5}>
-          <ConverterInput
-            value={amount}
-            onChange={handleAmountChange}
-            adornment={
-              <span role="img" aria-label="KRW">
-                🇰🇷 KRW
-              </span>
-            }
-            adornmentPosition="end"
-          />
-        </Grid>
-        <Grid item xs={2} style={{ textAlign: "center" }}>
-          <Typography variant="h6">↔</Typography>
-        </Grid>
-        <Grid item xs={5}>
-          <ConverterInput
-            value={amount / exchangeRate}
-            onChange={handleConvertedAmountChange}
-            adornment={
-              <span role="img" aria-label="USD">
-                🇺🇸 USD
-              </span>
-            }
-            adornmentPosition="end"
-          />
-        </Grid>
-      </Grid>
-      <SaveButton onClick={handleSave} />
-    </div>
+    <ConverterContainer
+      title="통화 변환기"
+      amount={amount}
+      convertedAmount={amount / exchangeRate}
+      onAmountChange={handleAmountChange}
+      onConvertedAmountChange={handleConvertedAmountChange}
+      adornmentLeft={
+        <span role="img" aria-label="KRW">
+          🇰🇷 KRW
+        </span>
+      }
+      adornmentRight={
+        <span role="img" aria-label="USD">
+          🇺🇸 USD
+        </span>
+      }
+      onSave={handleSave}
+    />
   );
 }
 

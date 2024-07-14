@@ -1,7 +1,5 @@
-import { Typography, Grid } from "@mui/material";
 import { createConverterStore } from "../store/createConverterStore";
-import ConverterInput from "./ConverterInput";
-import SaveButton from "./SaveButton";
+import ConverterContainer from "./ConverterContainer";
 
 const useWeightStore = createConverterStore("weight");
 
@@ -34,31 +32,16 @@ function WeightConverter() {
   };
 
   return (
-    <div>
-      <Typography variant="h6">무게 변환기</Typography>
-      <Grid container spacing={2} alignItems="center">
-        <Grid item xs={5}>
-          <ConverterInput
-            value={amount}
-            onChange={handleAmountChange}
-            adornment="kg"
-            adornmentPosition="end"
-          />
-        </Grid>
-        <Grid item xs={2} style={{ textAlign: "center" }}>
-          <Typography variant="h6">↔</Typography>
-        </Grid>
-        <Grid item xs={5}>
-          <ConverterInput
-            value={amount * 2.20462}
-            onChange={handleConvertedAmountChange}
-            adornment="lb"
-            adornmentPosition="end"
-          />
-        </Grid>
-      </Grid>
-      <SaveButton onClick={handleSave} />
-    </div>
+    <ConverterContainer
+      title="무게 변환기"
+      amount={amount}
+      convertedAmount={amount * 2.20462}
+      onAmountChange={handleAmountChange}
+      onConvertedAmountChange={handleConvertedAmountChange}
+      adornmentLeft="kg"
+      adornmentRight="lb"
+      onSave={handleSave}
+    />
   );
 }
 

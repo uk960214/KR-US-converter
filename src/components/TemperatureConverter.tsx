@@ -1,7 +1,5 @@
-import { Typography, Grid } from "@mui/material";
 import { createConverterStore } from "../store/createConverterStore";
-import ConverterInput from "./ConverterInput";
-import SaveButton from "./SaveButton";
+import ConverterContainer from "./ConverterContainer";
 
 const useTemperatureStore = createConverterStore("temperature");
 
@@ -34,31 +32,16 @@ function TemperatureConverter() {
   };
 
   return (
-    <div>
-      <Typography variant="h6">온도 변환기</Typography>
-      <Grid container spacing={2} alignItems="center">
-        <Grid item xs={5}>
-          <ConverterInput
-            value={amount}
-            onChange={handleAmountChange}
-            adornment="°C"
-            adornmentPosition="end"
-          />
-        </Grid>
-        <Grid item xs={2} style={{ textAlign: "center" }}>
-          <Typography variant="h6">↔</Typography>
-        </Grid>
-        <Grid item xs={5}>
-          <ConverterInput
-            value={(amount * 9) / 5 + 32}
-            onChange={handleConvertedAmountChange}
-            adornment="°F"
-            adornmentPosition="end"
-          />
-        </Grid>
-      </Grid>
-      <SaveButton onClick={handleSave} />
-    </div>
+    <ConverterContainer
+      title="온도 변환기"
+      amount={amount}
+      convertedAmount={(amount * 9) / 5 + 32}
+      onAmountChange={handleAmountChange}
+      onConvertedAmountChange={handleConvertedAmountChange}
+      adornmentLeft="°C"
+      adornmentRight="°F"
+      onSave={handleSave}
+    />
   );
 }
 
