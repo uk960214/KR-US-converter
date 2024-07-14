@@ -6,6 +6,7 @@ import VolumeConverter from "./components/VolumeConverter";
 import ShoeSizeConverter from "./components/ShoeSizeConverter";
 import TemperatureConverter from "./components/TemperatureConverter";
 import SpeedConverter from "./components/SpeedConverter";
+import TimeDisplay from "./components/TimeDisplay";
 
 function App() {
   return (
@@ -16,6 +17,9 @@ function App() {
         </Toolbar>
       </AppBar>
       <Grid container spacing={3}>
+        <Grid item xs={12}>
+          <TimeDisplay />
+        </Grid>
         <Grid item xs={12} sm={6}>
           <CurrencyConverter />
         </Grid>
