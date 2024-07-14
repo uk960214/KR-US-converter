@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
-import { MenuItem, TextField, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import { createConverterStore } from "../store/createConverterStore";
 import useFetchExchangeRate from "../hooks/useFetchExchangeRate";
 import ConverterInput from "./ConverterInput";
+import SelectInput from "./SelectInput";
 import SaveButton from "./SaveButton";
 
 const currencies = [
@@ -46,20 +47,12 @@ function CurrencyConverter() {
     <div>
       <Typography variant="h6">통화 변환기</Typography>
       <ConverterInput label="금액" value={amount} onChange={setAmount} />
-      <TextField
-        select
+      <SelectInput
         label="통화"
         value={currency}
-        onChange={(e) => setCurrency(e.target.value)}
-        fullWidth
-        margin="normal"
-      >
-        {currencies.map((option) => (
-          <MenuItem key={option.value} value={option.value}>
-            {option.label}
-          </MenuItem>
-        ))}
-      </TextField>
+        onChange={setCurrency}
+        options={currencies}
+      />
       <Typography variant="body1">
         변환된 금액: {convertedAmount.toFixed(2)}
       </Typography>

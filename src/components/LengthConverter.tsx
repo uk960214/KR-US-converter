@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
-import { MenuItem, TextField, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import { createConverterStore } from "../store/createConverterStore";
 import ConverterInput from "./ConverterInput";
+import SelectInput from "./SelectInput";
 import SaveButton from "./SaveButton";
 
 const units = [
@@ -44,20 +45,12 @@ function LengthConverter() {
     <div>
       <Typography variant="h6">길이 변환기</Typography>
       <ConverterInput label="길이" value={amount} onChange={setAmount} />
-      <TextField
-        select
+      <SelectInput
         label="단위"
         value={unit}
-        onChange={(e) => setUnit(e.target.value)}
-        fullWidth
-        margin="normal"
-      >
-        {units.map((option) => (
-          <MenuItem key={option.value} value={option.value}>
-            {option.label}
-          </MenuItem>
-        ))}
-      </TextField>
+        onChange={setUnit}
+        options={units}
+      />
       <Typography variant="body1">
         변환된 길이: {convertedAmount.toFixed(2)}
       </Typography>
