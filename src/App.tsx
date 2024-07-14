@@ -1,6 +1,7 @@
 import { Container, AppBar, Toolbar, Typography, Grid } from "@mui/material";
 import CurrencyConverter from "./components/CurrencyConverter";
 import LengthConverter from "./components/LengthConverter";
+import WeightConverter from "./components/WeightConverter";
 
 function App() {
   return (
@@ -16,6 +17,9 @@ function App() {
         </Grid>
         <Grid item xs={12} sm={6}>
           <LengthConverter />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <WeightConverter />
         </Grid>
       </Grid>
     </Container>
