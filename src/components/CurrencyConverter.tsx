@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
-import { TextField, MenuItem, Typography, Button } from "@mui/material";
+import { MenuItem, TextField, Typography } from "@mui/material";
 import { createConverterStore } from "../store/createConverterStore";
-import { fetchExchangeRate } from "../services/exchangeRateService";
+import useFetchExchangeRate from "../hooks/useFetchExchangeRate";
+import ConverterInput from "./ConverterInput";
+import SaveButton from "./SaveButton";
 
 const currencies = [
   { value: "USD", label: "달러 (USD)" },
@@ -12,7 +14,7 @@ const useCurrencyStore = createConverterStore("currency");
 
 function CurrencyConverter() {
   const [currency, setCurrency] = useState("USD");
-  const [exchangeRate, setExchangeRate] = useState(1400); // 기본값 설정
+  const exchangeRate = useFetchExchangeRate(1400); // 기본값 설정
   const amount = useCurrencyStore((state) => state.amount);
   const setAmount = useCurrencyStore((state) => state.setAmount);
   const convertedAmount = useCurrencyStore((state) => state.convertedAmount);
@@ -20,19 +22,6 @@ function CurrencyConverter() {
     (state) => state.setConvertedAmount
   );
   const addHistory = useCurrencyStore((state) => state.addHistory);
-
-  useEffect(() => {
-    const fetchRate = async () => {
-      try {
-        const rate = await fetchExchangeRate();
-        setExchangeRate(rate);
-      } catch (error) {
-        console.error("환율 정보를 가져오는데 실패했습니다:", error);
-      }
-    };
-
-    fetchRate();
-  }, []);
 
   useEffect(() => {
     const convertCurrency = () => {
@@ -56,14 +45,7 @@ function CurrencyConverter() {
   return (
     <div>
       <Typography variant="h6">통화 변환기</Typography>
-      <TextField
-        label="금액"
-        type="number"
-        value={amount}
-        onChange={(e) => setAmount(Number(e.target.value))}
-        fullWidth
-        margin="normal"
-      />
+      <ConverterInput label="금액" value={amount} onChange={setAmount} />
       <TextField
         select
         label="통화"
@@ -81,9 +63,7 @@ function CurrencyConverter() {
       <Typography variant="body1">
         변환된 금액: {convertedAmount.toFixed(2)}
       </Typography>
-      <Button variant="contained" color="primary" onClick={handleSave}>
-        기록 저장
-      </Button>
+      <SaveButton onClick={handleSave} />
     </div>
   );
 }
