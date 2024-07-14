@@ -1,74 +1,62 @@
-import { useState, useEffect } from "react";
-import { Typography } from "@mui/material";
+import { Typography, Grid } from "@mui/material";
 import { createConverterStore } from "../store/createConverterStore";
 import ConverterInput from "./ConverterInput";
-import SelectInput from "./SelectInput";
 import SaveButton from "./SaveButton";
-
-const units = [
-  { value: "celsius", label: "섭씨 (°C)" },
-  { value: "fahrenheit", label: "화씨 (°F)" },
-];
 
 const useTemperatureStore = createConverterStore("temperature");
 
 function TemperatureConverter() {
-  const [unit, setUnit] = useState("celsius");
+  const { amount, setAmount, addHistory } = useTemperatureStore(
+    ({ amount, setAmount, addHistory }) => ({
+      amount,
+      setAmount,
+      addHistory,
+    })
+  );
 
-  const { amount, setAmount, convertedAmount, setConvertedAmount, addHistory } =
-    useTemperatureStore(
-      ({
-        amount,
-        setAmount,
-        convertedAmount,
-        setConvertedAmount,
-        addHistory,
-      }) => ({
-        amount,
-        setAmount,
-        convertedAmount,
-        setConvertedAmount,
-        addHistory,
-      })
-    );
+  const handleAmountChange = (value: number) => {
+    setAmount(value);
+  };
 
-  useEffect(() => {
-    const convertTemperature = () => {
-      let converted;
-      if (unit === "celsius") {
-        converted = (amount * 9) / 5 + 32; // 섭씨에서 화씨로 변환
-      } else {
-        converted = ((amount - 32) * 5) / 9; // 화씨에서 섭씨로 변환
-      }
-      setConvertedAmount(converted);
-    };
-    convertTemperature();
-  }, [amount, unit, setConvertedAmount]);
+  const handleConvertedAmountChange = (value: number) => {
+    setAmount(((value - 32) * 5) / 9);
+  };
 
   const handleSave = () => {
     const date = new Date().toLocaleString();
     addHistory({
       date,
-      from: unit === "celsius" ? "섭씨 (°C)" : "화씨 (°F)",
-      to: unit === "celsius" ? "화씨 (°F)" : "섭씨 (°C)",
+      from: "°C",
+      to: "°F",
       amount,
-      result: convertedAmount,
+      result: (amount * 9) / 5 + 32,
     });
   };
 
   return (
     <div>
       <Typography variant="h6">온도 변환기</Typography>
-      <ConverterInput label="온도" value={amount} onChange={setAmount} />
-      <SelectInput
-        label="단위"
-        value={unit}
-        onChange={setUnit}
-        options={units}
-      />
-      <Typography variant="body1">
-        변환된 온도: {convertedAmount.toFixed(2)}
-      </Typography>
+      <Grid container spacing={2} alignItems="center">
+        <Grid item xs={5}>
+          <ConverterInput
+            value={amount}
+            onChange={handleAmountChange}
+            adornment="°C"
+            adornmentPosition="end"
+          />
+        </Grid>
+        <Grid item xs={2} style={{ textAlign: "center" }}>
+          <Typography variant="h6">↔</Typography>
+        </Grid>
+        <Grid item xs={5}>
+          <ConverterInput
+            value={(amount * 9) / 5 + 32}
+            onChange={handleConvertedAmountChange}
+            adornment="°F"
+            adornmentPosition="end"
+          />
+        </Grid>
+      </Grid>
       <SaveButton onClick={handleSave} />
     </div>
   );
