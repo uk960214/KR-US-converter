@@ -5,6 +5,7 @@ import WeightConverter from "./components/WeightConverter";
 import VolumeConverter from "./components/VolumeConverter";
 import ShoeSizeConverter from "./components/ShoeSizeConverter";
 import TemperatureConverter from "./components/TemperatureConverter";
+import SpeedConverter from "./components/SpeedConverter";
 
 function App() {
   return (
@@ -32,6 +33,9 @@ function App() {
         </Grid>
         <Grid item xs={12} sm={6}>
           <TemperatureConverter />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <SpeedConverter />
         </Grid>
       </Grid>
     </Container>
