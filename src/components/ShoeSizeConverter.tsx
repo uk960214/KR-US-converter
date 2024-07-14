@@ -29,7 +29,7 @@ function ShoeSizeConverter() {
 
   return (
     <div>
-      <Typography variant="h6">신발 크기 변환기</Typography>
+      <Typography variant="h6">신발 사이즈 변환기</Typography>
       <Grid container spacing={2} alignItems="center">
         <Grid item xs={5}>
           <ConverterInput
