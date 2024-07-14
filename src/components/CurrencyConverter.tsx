@@ -16,13 +16,23 @@ const useCurrencyStore = createConverterStore("currency");
 function CurrencyConverter() {
   const [currency, setCurrency] = useState("USD");
   const exchangeRate = useFetchExchangeRate(1400); // 기본값 설정
-  const amount = useCurrencyStore((state) => state.amount);
-  const setAmount = useCurrencyStore((state) => state.setAmount);
-  const convertedAmount = useCurrencyStore((state) => state.convertedAmount);
-  const setConvertedAmount = useCurrencyStore(
-    (state) => state.setConvertedAmount
-  );
-  const addHistory = useCurrencyStore((state) => state.addHistory);
+
+  const { amount, setAmount, convertedAmount, setConvertedAmount, addHistory } =
+    useCurrencyStore(
+      ({
+        amount,
+        setAmount,
+        convertedAmount,
+        setConvertedAmount,
+        addHistory,
+      }) => ({
+        amount,
+        setAmount,
+        convertedAmount,
+        setConvertedAmount,
+        addHistory,
+      })
+    );
 
   useEffect(() => {
     const convertCurrency = () => {

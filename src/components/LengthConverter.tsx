@@ -14,13 +14,23 @@ const useLengthStore = createConverterStore("length");
 
 function LengthConverter() {
   const [unit, setUnit] = useState("meters");
-  const amount = useLengthStore((state) => state.amount);
-  const setAmount = useLengthStore((state) => state.setAmount);
-  const convertedAmount = useLengthStore((state) => state.convertedAmount);
-  const setConvertedAmount = useLengthStore(
-    (state) => state.setConvertedAmount
-  );
-  const addHistory = useLengthStore((state) => state.addHistory);
+
+  const { amount, setAmount, convertedAmount, setConvertedAmount, addHistory } =
+    useLengthStore(
+      ({
+        amount,
+        setAmount,
+        convertedAmount,
+        setConvertedAmount,
+        addHistory,
+      }) => ({
+        amount,
+        setAmount,
+        convertedAmount,
+        setConvertedAmount,
+        addHistory,
+      })
+    );
 
   useEffect(() => {
     const convertLength = () => {
