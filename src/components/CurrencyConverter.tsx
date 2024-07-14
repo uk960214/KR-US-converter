@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
 import { TextField, MenuItem, Typography, Button } from "@mui/material";
-import { useCurrencyStore } from "../store/useCurrencyStore";
+import { createConverterStore } from "../store/createConverterStore";
 import { fetchExchangeRate } from "../services/exchangeRateService";
 
 const currencies = [
   { value: "USD", label: "달러 (USD)" },
   { value: "KRW", label: "원화 (KRW)" },
 ];
+
+const useCurrencyStore = createConverterStore("currency");
 
 function CurrencyConverter() {
   const [currency, setCurrency] = useState("USD");

@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
 import { TextField, MenuItem, Typography, Button } from "@mui/material";
-import { useLengthStore } from "../store/useLengthStore";
+import { createConverterStore } from "../store/createConverterStore";
 
 const units = [
   { value: "meters", label: "미터 (m)" },
   { value: "inches", label: "인치 (in)" },
 ];
+
+const useLengthStore = createConverterStore("length");
 
 function LengthConverter() {
   const [unit, setUnit] = useState("meters");
