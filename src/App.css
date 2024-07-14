@@ -1,6 +1,34 @@
+body,
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: "Roboto", sans-serif;
+}
+
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  height: 100%;
+}
+
+.gradient-background {
+  background: linear-gradient(135deg, #030b66, #e02834, #f18a19);
+  animation: gradient-animation 15s ease infinite;
+}
+
+@keyframes gradient-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.overlay {
+  background-color: rgba(255, 255, 255, 0.4);
+  width: 100%;
+  max-width: 800px;
 }
