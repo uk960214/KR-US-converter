@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { TextField, MenuItem, Typography, Button } from "@mui/material";
-import { useStore } from "../store/useStore";
+import { useCurrencyStore } from "../store/useCurrencyStore";
 import { fetchExchangeRate } from "../services/exchangeRateService";
 
 const currencies = [
@@ -11,11 +11,13 @@ const currencies = [
 function CurrencyConverter() {
   const [currency, setCurrency] = useState("USD");
   const [exchangeRate, setExchangeRate] = useState(1400); // 기본값 설정
-  const amount = useStore((state) => state.amount);
-  const setAmount = useStore((state) => state.setAmount);
-  const convertedAmount = useStore((state) => state.convertedAmount);
-  const setConvertedAmount = useStore((state) => state.setConvertedAmount);
-  const addHistory = useStore((state) => state.addHistory);
+  const amount = useCurrencyStore((state) => state.amount);
+  const setAmount = useCurrencyStore((state) => state.setAmount);
+  const convertedAmount = useCurrencyStore((state) => state.convertedAmount);
+  const setConvertedAmount = useCurrencyStore(
+    (state) => state.setConvertedAmount
+  );
+  const addHistory = useCurrencyStore((state) => state.addHistory);
 
   useEffect(() => {
     const fetchRate = async () => {

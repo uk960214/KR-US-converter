@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { TextField, MenuItem, Typography, Button } from "@mui/material";
-import { useStore } from "../store/useStore";
+import { useLengthStore } from "../store/useLengthStore";
 
 const units = [
   { value: "meters", label: "미터 (m)" },
@@ -9,11 +9,13 @@ const units = [
 
 function LengthConverter() {
   const [unit, setUnit] = useState("meters");
-  const amount = useStore((state) => state.amount);
-  const setAmount = useStore((state) => state.setAmount);
-  const convertedAmount = useStore((state) => state.convertedAmount);
-  const setConvertedAmount = useStore((state) => state.setConvertedAmount);
-  const addHistory = useStore((state) => state.addHistory);
+  const amount = useLengthStore((state) => state.amount);
+  const setAmount = useLengthStore((state) => state.setAmount);
+  const convertedAmount = useLengthStore((state) => state.convertedAmount);
+  const setConvertedAmount = useLengthStore(
+    (state) => state.setConvertedAmount
+  );
+  const addHistory = useLengthStore((state) => state.addHistory);
 
   useEffect(() => {
     const convertLength = () => {
