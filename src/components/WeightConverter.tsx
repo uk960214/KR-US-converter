@@ -1,7 +1,7 @@
 import { createConverterStore } from "../store/createConverterStore";
 import ConverterContainer from "./ConverterContainer";
 
-const useWeightStore = createConverterStore("weight");
+const useWeightStore = createConverterStore("weight", 1);
 
 function WeightConverter() {
   const { amount, setAmount, addHistory } = useWeightStore(

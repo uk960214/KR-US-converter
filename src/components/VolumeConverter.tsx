@@ -1,7 +1,7 @@
 import { createConverterStore } from "../store/createConverterStore";
 import ConverterContainer from "./ConverterContainer";
 
-const useVolumeStore = createConverterStore("volume");
+const useVolumeStore = createConverterStore("volume", 1);
 
 function VolumeConverter() {
   const { amount, setAmount, addHistory } = useVolumeStore(

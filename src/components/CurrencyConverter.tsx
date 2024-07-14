@@ -2,7 +2,7 @@ import { createConverterStore } from "../store/createConverterStore";
 import useFetchExchangeRate from "../hooks/useFetchExchangeRate";
 import ConverterContainer from "./ConverterContainer";
 
-const useCurrencyStore = createConverterStore("currency");
+const useCurrencyStore = createConverterStore("currency", 1000);
 
 function CurrencyConverter() {
   const exchangeRate = useFetchExchangeRate(1400); // 기본값 설정
@@ -38,17 +38,17 @@ function CurrencyConverter() {
     <ConverterContainer
       title="통화 변환기"
       amount={amount}
-      convertedAmount={amount / exchangeRate}
+      convertedAmount={Number((amount / exchangeRate).toFixed(2))}
       onAmountChange={handleAmountChange}
       onConvertedAmountChange={handleConvertedAmountChange}
       adornmentLeft={
         <span role="img" aria-label="KRW">
-          🇰🇷 KRW
+          KRW
         </span>
       }
       adornmentRight={
         <span role="img" aria-label="USD">
-          🇺🇸 USD
+          USD
         </span>
       }
       onSave={handleSave}

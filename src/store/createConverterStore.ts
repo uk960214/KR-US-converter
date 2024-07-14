@@ -3,8 +3,6 @@ import { create } from "zustand";
 interface ConversionState {
   amount: number;
   setAmount: (amount: number) => void;
-  convertedAmount: number;
-  setConvertedAmount: (convertedAmount: number) => void;
   history: {
     date: string;
     from: string;
@@ -23,12 +21,10 @@ interface ConversionState {
   }) => void;
 }
 
-export const createConverterStore = (key: string) =>
+export const createConverterStore = (key: string, initialAmount: number) =>
   create<ConversionState>((set) => ({
-    amount: 0,
+    amount: initialAmount,
     setAmount: (amount) => set({ amount }),
-    convertedAmount: 0,
-    setConvertedAmount: (convertedAmount) => set({ convertedAmount }),
     history: JSON.parse(localStorage.getItem(`${key}History`) || "[]"),
     addHistory: (record) =>
       set((state) => {

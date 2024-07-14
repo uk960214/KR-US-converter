@@ -1,7 +1,7 @@
 import { createConverterStore } from "../store/createConverterStore";
 import ConverterContainer from "./ConverterContainer";
 
-const useLengthStore = createConverterStore("length");
+const useLengthStore = createConverterStore("length", 1);
 
 function LengthConverter() {
   const { amount, setAmount, addHistory } = useLengthStore(

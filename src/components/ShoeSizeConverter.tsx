@@ -1,7 +1,7 @@
 import { createConverterStore } from "../store/createConverterStore";
 import ConverterContainer from "./ConverterContainer";
 
-const useShoeSizeStore = createConverterStore("shoeSize");
+const useShoeSizeStore = createConverterStore("shoeSize", 240);
 
 // 한국(mm) -> 미국(US) 변환표
 const krToUs = {

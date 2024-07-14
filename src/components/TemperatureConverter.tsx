@@ -1,7 +1,7 @@
 import { createConverterStore } from "../store/createConverterStore";
 import ConverterContainer from "./ConverterContainer";
 
-const useTemperatureStore = createConverterStore("temperature");
+const useTemperatureStore = createConverterStore("temperature", 0);
 
 function TemperatureConverter() {
   const { amount, setAmount, addHistory } = useTemperatureStore(

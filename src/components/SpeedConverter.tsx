@@ -1,7 +1,7 @@
 import { createConverterStore } from "../store/createConverterStore";
 import ConverterContainer from "./ConverterContainer";
 
-const useSpeedStore = createConverterStore("speed");
+const useSpeedStore = createConverterStore("speed", 1);
 
 function SpeedConverter() {
   const { amount, setAmount, addHistory } = useSpeedStore(
