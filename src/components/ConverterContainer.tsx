@@ -1,6 +1,6 @@
 import { Typography, Grid } from "@mui/material";
 import ConverterInput from "./ConverterInput";
-import SaveButton from "./SaveButton";
+// import SaveButton from "./SaveButton";
 
 interface ConverterContainerProps {
   title: string;
@@ -21,7 +21,7 @@ const ConverterContainer: React.FC<ConverterContainerProps> = ({
   onConvertedAmountChange,
   adornmentLeft,
   adornmentRight,
-  onSave,
+  // onSave,
 }) => {
   return (
     <div>
@@ -47,7 +47,7 @@ const ConverterContainer: React.FC<ConverterContainerProps> = ({
           />
         </Grid>
       </Grid>
-      <SaveButton onClick={onSave} />
+      {/* <SaveButton onClick={onSave} /> */}
     </div>
   );
 };
